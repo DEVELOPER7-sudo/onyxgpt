@@ -164,7 +164,7 @@ const ChatArea = ({
   return (
     <div className="flex-1 flex flex-col h-screen">
       {/* Header */}
-      <div className="border-b border-border p-4 flex items-center justify-between bg-card/50 backdrop-blur-sm transition-all duration-300">
+      <div className="border-b border-border p-3 sm:p-4 flex items-center justify-between bg-card/50 backdrop-blur-sm transition-all duration-300">
         <div className="flex-1">
           {isEditingTitle ? (
             <Input
@@ -177,11 +177,11 @@ const ChatArea = ({
             />
           ) : (
             <div className="flex items-center gap-2">
-              <h2 className="text-lg font-semibold">{chat.title}</h2>
+              <h2 className="text-base sm:text-lg font-semibold truncate">{chat.title}</h2>
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-6 w-6"
+                className="h-6 w-6 flex-shrink-0"
                 onClick={() => {
                   setEditedTitle(chat.title);
                   setIsEditingTitle(true);
@@ -192,11 +192,11 @@ const ChatArea = ({
             </div>
           )}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
           <Button
             variant="ghost"
             size="icon"
-            className="transition-all duration-200 hover:scale-110"
+            className="h-8 w-8 sm:h-10 sm:w-10 transition-all duration-200 hover:scale-110"
             onClick={() => {
               const data = JSON.stringify(chat, null, 2);
               const blob = new Blob([data], { type: 'application/json' });
@@ -208,22 +208,22 @@ const ChatArea = ({
               toast.success('Chat exported');
             }}
           >
-            <Download className="w-5 h-5" />
+            <Download className="w-4 h-4 sm:w-5 sm:h-5" />
           </Button>
           <Button
             variant="ghost"
             size="icon"
-            className="transition-all duration-200 hover:scale-110 hover:text-destructive"
+            className="h-8 w-8 sm:h-10 sm:w-10 transition-all duration-200 hover:scale-110 hover:text-destructive"
             onClick={() => onDeleteChat(chat.id)}
           >
-            <Trash2 className="w-5 h-5" />
+            <Trash2 className="w-4 h-4 sm:w-5 sm:h-5" />
           </Button>
         </div>
       </div>
 
       {/* Messages */}
-      <ScrollArea className="flex-1 p-4" ref={scrollRef}>
-        <div className="max-w-4xl mx-auto space-y-4 px-2">
+      <ScrollArea className="flex-1 p-2 sm:p-4" ref={scrollRef}>
+        <div className="max-w-4xl mx-auto space-y-3 sm:space-y-4 px-1 sm:px-2">
           {chat.messages.map((message) => (
             <div
               key={message.id}
@@ -234,7 +234,7 @@ const ChatArea = ({
             >
               <div
                 className={cn(
-                  'max-w-[85%] min-w-0 rounded-2xl p-4 shadow-lg transition-all duration-300 hover:shadow-xl',
+                  'max-w-[90%] sm:max-w-[85%] min-w-0 rounded-2xl p-3 sm:p-4 shadow-lg transition-all duration-300 hover:shadow-xl',
                   message.role === 'user'
                     ? 'bg-primary text-primary-foreground'
                     : 'bg-card border border-border'
@@ -306,19 +306,19 @@ const ChatArea = ({
       </ScrollArea>
 
       {/* Input Area */}
-      <div className="border-t border-border p-4 bg-card/50 backdrop-blur-sm">
-        <div className="max-w-4xl mx-auto space-y-3">
+      <div className="border-t border-border p-2 sm:p-4 bg-card/50 backdrop-blur-sm">
+        <div className="max-w-4xl mx-auto space-y-2 sm:space-y-3">
           {/* Toggles */}
-          <div className="flex items-center gap-6 text-sm">
+          <div className="flex items-center gap-3 sm:gap-6 text-xs sm:text-sm flex-wrap">
             <div className="flex items-center gap-2">
               <Switch
                 checked={webSearchEnabled}
                 onCheckedChange={onToggleWebSearch}
                 id="web-search"
               />
-              <Label htmlFor="web-search" className="flex items-center gap-1 cursor-pointer">
-                <Globe className="w-4 h-4" />
-                Web Search
+              <Label htmlFor="web-search" className="flex items-center gap-1 cursor-pointer whitespace-nowrap">
+                <Globe className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="text-xs sm:text-sm">Web Search</span>
               </Label>
             </div>
             <div className="flex items-center gap-2">
@@ -327,9 +327,9 @@ const ChatArea = ({
                 onCheckedChange={onToggleDeepSearch}
                 id="deep-search"
               />
-              <Label htmlFor="deep-search" className="flex items-center gap-1 cursor-pointer">
-                <SearchIcon className="w-4 h-4" />
-                Deep Search
+              <Label htmlFor="deep-search" className="flex items-center gap-1 cursor-pointer whitespace-nowrap">
+                <SearchIcon className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="text-xs sm:text-sm">Deep Search</span>
               </Label>
             </div>
           </div>
@@ -357,7 +357,7 @@ const ChatArea = ({
           )}
 
           {/* Input */}
-          <div className="flex gap-2">
+          <div className="flex gap-1 sm:gap-2">
             <input
               ref={fileInputRef}
               type="file"
@@ -369,35 +369,35 @@ const ChatArea = ({
             <Button
               variant="ghost"
               size="icon"
-              className="transition-all duration-200 hover:scale-110 hover:rotate-12"
+              className="h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0 transition-all duration-200 hover:scale-110 hover:rotate-12"
               onClick={() => fileInputRef.current?.click()}
             >
-              <Paperclip className="w-5 h-5" />
+              <Paperclip className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
             <Textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Type a message or use /img to generate an image..."
-              className="flex-1 min-h-[60px] max-h-[200px] resize-none bg-input border-input"
+              placeholder="Type a message..."
+              className="flex-1 min-h-[50px] sm:min-h-[60px] max-h-[200px] resize-none bg-input border-input text-sm sm:text-base"
             />
             <Button
               variant="ghost"
               size="icon"
-              className="transition-all duration-200 hover:scale-110"
+              className="h-9 w-9 sm:h-10 sm:w-10 hidden sm:flex flex-shrink-0 transition-all duration-200 hover:scale-110"
             >
-              <Mic className="w-5 h-5" />
+              <Mic className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
             <Button
               onClick={handleSend}
               disabled={isLoading}
-              className="glow-blue transition-all duration-300 hover:scale-110"
+              className="glow-blue h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0 transition-all duration-300 hover:scale-110"
               size="icon"
             >
               {isLoading ? (
-                <Loader2 className="w-5 h-5 animate-spin" />
+                <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 animate-spin" />
               ) : (
-                <Send className="w-5 h-5 transition-transform duration-200 hover:translate-x-1" />
+                <Send className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-200 hover:translate-x-1" />
               )}
             </Button>
           </div>

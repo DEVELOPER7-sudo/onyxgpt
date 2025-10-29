@@ -327,8 +327,8 @@ What would you like to work on today?`,
   return (
     <div className="flex h-screen w-full bg-background">
       {/* Header with Logo */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
-        <div className="flex items-center justify-between px-4 py-3">
+      <div className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+        <div className="flex items-center justify-between px-3 sm:px-4 py-2 sm:py-3">
           <div className="flex items-center gap-3">
             <div className="md:hidden">
               <Button
@@ -343,9 +343,9 @@ What would you like to work on today?`,
             <img 
               src={logoImage} 
               alt="OnyxGPT" 
-              className="w-8 h-8 object-contain"
+              className="w-7 h-7 sm:w-8 sm:h-8 object-contain"
             />
-            <span className="font-bold text-lg">OnyxGPT</span>
+            <span className="font-bold text-base sm:text-lg">OnyxGPT</span>
           </div>
         </div>
       </div>
@@ -353,9 +353,9 @@ What would you like to work on today?`,
       {/* Sidebar */}
       <div
         className={cn(
-          'transition-all duration-300 ease-in-out pt-16',
+          'transition-all duration-300 ease-in-out pt-14 sm:pt-16',
           'md:static md:translate-x-0',
-          'fixed inset-y-0 left-0 z-40 w-72 md:w-auto',
+          'fixed inset-y-0 left-0 z-40 w-64 sm:w-72 md:w-auto',
           mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
@@ -385,7 +385,7 @@ What would you like to work on today?`,
       )}
 
       {/* Main Content */}
-      <div className="flex-1 overflow-y-auto pt-16">
+      <div className="flex-1 overflow-y-auto pt-14 sm:pt-16">
         {currentView === 'chat' && (
           <ChatArea
             chat={currentChat}
