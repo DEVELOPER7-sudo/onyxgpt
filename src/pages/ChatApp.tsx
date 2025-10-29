@@ -9,6 +9,8 @@ import { Menu, X, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useTheme } from '@/hooks/useTheme';
 import { useChatPersistence } from '@/hooks/useChatPersistence';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import logoImage from "@/assets/onyxgpt-logo.png";
 
 // Lazy load heavy components
 const SettingsPanel = lazy(() => import('@/components/SettingsPanel'));
@@ -325,22 +327,35 @@ What would you like to work on today?`,
 
   return (
     <div className="flex h-screen w-full bg-background overflow-hidden">
-      {/* Mobile Menu Button */}
-      <div className="md:hidden fixed top-4 left-4 z-50">
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="glow-blue"
-        >
-          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </Button>
+      {/* Header with Logo and Theme Toggle */}
+      <div className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
+        <div className="flex items-center justify-between px-4 py-2">
+          <div className="flex items-center gap-3">
+            <div className="md:hidden">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="glow-blue"
+              >
+                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </Button>
+            </div>
+            <img 
+              src={logoImage} 
+              alt="OnyxGPT" 
+              className="w-8 h-8 dark:invert-0 invert transition-all duration-300"
+            />
+            <span className="font-bold text-lg hidden md:inline">OnyxGPT</span>
+          </div>
+          <ThemeToggle />
+        </div>
       </div>
 
       {/* Sidebar */}
       <div
         className={cn(
-          'transition-all duration-300 ease-in-out',
+          'transition-all duration-300 ease-in-out pt-16',
           'md:static md:translate-x-0',
           'fixed inset-y-0 left-0 z-40 w-72 md:w-auto',
           mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
@@ -372,7 +387,7 @@ What would you like to work on today?`,
       )}
 
       {/* Main Content */}
-      <div className="flex-1 overflow-hidden">
+      <div className="flex-1 overflow-hidden pt-16">
         {currentView === 'chat' && (
           <ChatArea
             chat={currentChat}

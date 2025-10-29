@@ -2,13 +2,29 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Sparkles, Zap, Shield, Globe, Image, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import logoImage from "@/assets/onyxgpt-logo.png";
 
 const Landing = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {/* Theme Toggle */}
+      <div className="fixed top-6 right-6 z-50">
+        <ThemeToggle />
+      </div>
+
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-20">
         <div className="text-center space-y-6 animate-fade-in">
+          {/* Logo */}
+          <div className="flex justify-center mb-8">
+            <img 
+              src={logoImage} 
+              alt="OnyxGPT Logo" 
+              className="w-32 h-32 md:w-40 md:h-40 dark:invert-0 invert transition-all duration-300 animate-pulse-glow"
+            />
+          </div>
+
           <div className="inline-block">
             <div className="flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-2 glow-blue">
               <Sparkles className="w-4 h-4 text-primary" />
@@ -17,7 +33,7 @@ const Landing = () => {
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-            AI Chat Studio
+            OnyxGPT
           </h1>
 
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
@@ -106,7 +122,7 @@ const Landing = () => {
         <div className="mt-20 text-center">
           <Link to="/chat">
             <Button size="lg" className="glow-blue-strong text-lg px-12 py-6">
-              Launch AI Chat Studio
+              Launch OnyxGPT
             </Button>
           </Link>
         </div>
