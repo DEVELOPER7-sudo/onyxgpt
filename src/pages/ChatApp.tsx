@@ -9,8 +9,7 @@ import { Menu, X, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useTheme } from '@/hooks/useTheme';
 import { useChatPersistence } from '@/hooks/useChatPersistence';
-import { ThemeToggle } from '@/components/ThemeToggle';
-import logoImage from "@/assets/onyxgpt-logo.png";
+import logoImage from "@/assets/onyxgpt-logo.jpg";
 
 // Lazy load heavy components
 const SettingsPanel = lazy(() => import('@/components/SettingsPanel'));
@@ -326,10 +325,10 @@ What would you like to work on today?`,
   };
 
   return (
-    <div className="flex h-screen w-full bg-background overflow-hidden">
-      {/* Header with Logo and Theme Toggle */}
+    <div className="flex h-screen w-full bg-background">
+      {/* Header with Logo */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
-        <div className="flex items-center justify-between px-4 py-2">
+        <div className="flex items-center justify-between px-4 py-3">
           <div className="flex items-center gap-3">
             <div className="md:hidden">
               <Button
@@ -344,11 +343,10 @@ What would you like to work on today?`,
             <img 
               src={logoImage} 
               alt="OnyxGPT" 
-              className="w-8 h-8 dark:invert-0 invert transition-all duration-300"
+              className="w-8 h-8 object-contain"
             />
-            <span className="font-bold text-lg hidden md:inline">OnyxGPT</span>
+            <span className="font-bold text-lg">OnyxGPT</span>
           </div>
-          <ThemeToggle />
         </div>
       </div>
 
@@ -387,7 +385,7 @@ What would you like to work on today?`,
       )}
 
       {/* Main Content */}
-      <div className="flex-1 overflow-hidden pt-16">
+      <div className="flex-1 overflow-y-auto pt-16">
         {currentView === 'chat' && (
           <ChatArea
             chat={currentChat}
